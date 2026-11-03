@@ -20,6 +20,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
 <meta property="og:title" content="Fábio Alexsander — Desenvolvedor Front-end">
 <meta property="og:description" content="Interfaces modernas e responsivas com React, TypeScript e Tailwind CSS. Veja meus projetos e entre em contato.">
 <meta property="og:url" content="https://fabioalx29.github.io/Fabioalx-portifolio/">
@@ -44,7 +45,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -65,10 +66,11 @@
           borderSoft: 'rgb(var(--c-borderSoft) / <alpha-value>)',
           onAccent: 'rgb(var(--c-onAccent) / <alpha-value>)',
         },
+        // As fontes japonesas entram só como reserva: letras latinas continuam nas fontes originais
         fontFamily: {
-          serif: ['Fraunces', 'Georgia', 'serif'],
-          sans: ['IBM Plex Sans', 'sans-serif'],
-          mono: ['IBM Plex Mono', 'monospace'],
+          serif: ['Fraunces', 'Noto Serif JP', 'Georgia', 'serif'],
+          sans: ['IBM Plex Sans', 'Noto Sans JP', 'sans-serif'],
+          mono: ['IBM Plex Mono', 'Noto Sans JP', 'monospace'],
         },
       },
     },
@@ -218,7 +220,7 @@
   /* a barra fixa não cobre o título da seção ao clicar no menu */
   section[id] { scroll-margin-top: 4.5rem; }
 
-  /* seletor de idioma PT/EN */
+  /* seletor de idioma PT/EN/JA */
   .lang-toggle {
     display: flex;
     align-items: center;
@@ -241,6 +243,24 @@
   .lang-btn.active-lang {
     background: rgb(var(--c-ink));
     color: rgb(var(--c-bg));
+  }
+
+  /* ===== ajustes para o japonês ===== */
+  /* "ch" mede a largura do "0"; os caracteres japoneses são mais largos, então os limites precisam de mais folga */
+  :root:lang(ja) .max-w-\[62ch\] { max-width: 38em; }
+  :root:lang(ja) .max-w-\[56ch\] { max-width: 34em; }
+  :root:lang(ja) .max-w-\[48ch\] { max-width: 30em; }
+  :root:lang(ja) .max-w-\[46ch\] { max-width: 30em; }
+  :root:lang(ja) .max-w-\[16ch\] { max-width: 20em; }
+  /* a letra capitular não faz sentido em japonês */
+  :root:lang(ja) .drop-cap::first-letter {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    line-height: inherit;
+    margin: 0;
+    color: inherit;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -283,6 +303,7 @@
       <div class="lang-toggle">
         <button id="lang-pt" class="lang-btn active-lang" type="button" aria-label="Português">PT</button>
         <button id="lang-en" class="lang-btn" type="button" aria-label="English">EN</button>
+        <button id="lang-ja" class="lang-btn" type="button" lang="ja" aria-label="日本語" title="日本語">JA</button>
       </div>
 
       <button id="menu-toggle" class="md:hidden text-muted hover:text-accent" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-panel">
@@ -429,11 +450,11 @@
 
       <!-- PROJETO 1 -->
       <article class="project-row fade-in grid md:grid-cols-[320px_1fr] lg:grid-cols-[400px_1fr] gap-8 py-10 first:pt-0">
-        <a href="https://fabioalx29.github.io/Projeto-React-Tailwind/" target="_blank" rel="noopener" aria-label="Abrir o projeto iPhone 17 Pro — Landing Page"
+        <a href="https://fabioalx29.github.io/Projeto-Atlas/" target="_blank" rel="noopener" aria-label="Abrir o projeto Atlas"
            class="project-cover ph-preview group relative block aspect-video self-start rounded-md overflow-hidden border border-border">
           <img
-            src="public/foto projeto iph.png"
-            alt="Captura de tela da landing page do iPhone 17 Pro"
+            src="public/tela atlas.jpg"
+            alt="Captura de tela do projeto Atlas"
             loading="lazy"
             class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
         </a>
@@ -441,32 +462,35 @@
         <div class="flex flex-col gap-4">
           <div>
             <span class="font-mono text-xs text-faint">01</span>
-            <h3 class="font-serif text-xl mt-1">iPhone 17 Pro — Landing Page</h3>
+            <h3 class="font-serif text-xl mt-1">Atlas-Progamador de viagens</h3>
           </div>
 
           <div>
             <p class="font-mono text-xs text-accent mb-1.5" data-i18n="p1.whatLabel">O QUE É</p>
-            <p class="text-muted text-sm max-w-[62ch]" data-i18n="p1.what">Página de apresentação de produto inspirada no estilo da Apple, destacando especificações e recursos do aparelho de forma visual.</p>
+            <p class="text-muted text-sm max-w-[62ch]" data-i18n="p1.what">O Atlas é uma plataforma de descoberta de destinos que permite explorar lugares, visualizar localizações em mapas interativos, consultar informações meteorológicas e planejar viagens.</p>
           </div>
 
           <div>
             <p class="font-mono text-xs text-accent mb-1.5" data-i18n="p1.howLabel">COMO FIZ</p>
-            <p class="text-muted text-sm max-w-[62ch]" data-i18n="p1.how">Estruturei os componentes em React, separando cada seção do produto (hero, especificações, galeria) em componentes reutilizáveis, e usei Tailwind para o layout responsivo e as transições entre seções.</p>
+            <p class="text-muted text-sm max-w-[62ch]" data-i18n="p1.how">Desenvolvi o projeto utilizando React e TypeScript, com Tailwind CSS para a interface, React Leaflet para os mapas e integração com a API Open-Meteo para informações meteorológicas. Também utilizei React Router para a navegação entre páginas.</p>
           </div>
 
           <div>
             <p class="font-mono text-xs text-accent mb-1.5" data-i18n="p1.roleLabel">MINHA PARTICIPAÇÃO</p>
-            <p class="text-muted text-sm max-w-[62ch]" data-i18n="p1.role">Projeto individual, feito do zero: estrutura, estilo e conteúdo.</p>
+            <p class="text-muted text-sm max-w-[62ch]" data-i18n="p1.role">Projeto individual, desenvolvido por mim desde a estruturação até a implementação. Fui responsável pela criação das interfaces, funcionalidades, integração com APIs, responsividade e publicação do projeto.</p>
           </div>
 
           <div class="flex flex-wrap gap-1.5 mt-1">
             <span class="font-mono text-[11px] text-faint border border-border rounded-[3px] px-2 py-0.5">React</span>
             <span class="font-mono text-[11px] text-faint border border-border rounded-[3px] px-2 py-0.5">Tailwind</span>
+            <span class="font-mono text-[11px] text-faint border border-border rounded-[3px] px-2 py-0.5">TypeScript</span>
+            <span class="font-mono text-[11px] text-faint border border-border rounded-[3px] px-2 py-0.5">Open-Meteo</span>
+            <span class="font-mono text-[11px] text-faint border border-border rounded-[3px] px-2 py-0.5">Vite</span>
           </div>
 
           <div class="flex gap-2 mt-1">
-            <a href="https://fabioalx29.github.io/Projeto-React-Tailwind/" target="_blank" rel="noopener" class="btn-lift text-xs font-mono border border-border hover:border-accent hover:text-accent rounded-[3px] px-3 py-1.5" data-i18n="project.viewProject">Ver projeto</a>
-            <a href="https://github.com/Fabioalx29/Projeto-React-Tailwind" target="_blank" rel="noopener" class="btn-lift text-xs font-mono border border-border hover:border-accent hover:text-accent rounded-[3px] px-3 py-1.5">GitHub</a>
+            <a href="https://fabioalx29.github.io/Projeto-Atlas/" target="_blank" rel="noopener" class="btn-lift text-xs font-mono border border-border hover:border-accent hover:text-accent rounded-[3px] px-3 py-1.5" data-i18n="project.viewProject">Ver projeto</a>
+            <a href="https://github.com/Fabioalx29/Projeto-Atlas" target="_blank" rel="noopener" class="btn-lift text-xs font-mono border border-border hover:border-accent hover:text-accent rounded-[3px] px-3 py-1.5">GitHub</a>
           </div>
         </div>
       </article>
